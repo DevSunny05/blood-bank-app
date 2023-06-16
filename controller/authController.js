@@ -1,5 +1,6 @@
 import userModel from "../models/userModel.js"
 import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
 
 export const registerController=async(req,res)=>{
     try {
@@ -34,4 +35,44 @@ export const registerController=async(req,res)=>{
         })
     }
 
+}
+
+export const loginController=async(req,res)=>{
+    try {
+        const {email,password}=req.body
+        const user=await userModel.findOne({email})
+
+        if(!user){
+            return res.status(404).json({
+                success:false,
+                message:'Invalid Credientials'
+            })
+        }
+
+        // compare password
+        const comparePassword=await bcrypt.compare(password,user.password)
+
+        if(!comparePassword){
+            return  res.status(404).json({
+                success:false,
+                message:'Invalid Credientials'
+            })
+        }
+
+        // create token
+        const token= jwt.sign({userId:user._id},process.env.JWT_SECRET,{expiresIn:'1d'})
+
+        return res.status(201).json({
+            success:true,
+            message:'Login Successful',
+            user,
+            token
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            success:false,
+            message:'Login Failed',
+        })
+    }
 }

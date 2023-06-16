@@ -47,7 +47,7 @@ const userSchema=new mongoose.Schema({
     },
     website:{
         type:String,
-        required:[true,'website is require'],
+       
        
     },
     address:{
