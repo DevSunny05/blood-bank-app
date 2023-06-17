@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const inventrySchema=new mongoose.Schema({
-    inventrySchema:{
+    inventryType:{
         type:String,
         required:[true,'inventry type required'],
         enum:['in','out']
@@ -9,7 +9,7 @@ const inventrySchema=new mongoose.Schema({
     bloodGroup:{
         type:String,
         required:[true,'blood group is required'],
-        enum:['o+','o-','AB+','AB-','A+','A-','B+','B-']
+        enum:['O+','O-','AB+','AB-','A+','A-','B+','B-']
     },
     quantity:{
         type:Number,
