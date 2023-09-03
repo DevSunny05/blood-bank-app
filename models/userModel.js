@@ -14,7 +14,6 @@ const userSchema=new mongoose.Schema({
             }
             return false
         }
-       
     },
     organisationName:{
         type:String,

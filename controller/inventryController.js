@@ -47,3 +47,25 @@ export const createInventryController=async(req,res)=>{
         })
     }
 }
+
+export const getInventryController=async(req,res)=>{
+    try {
+        let inventry=await inventryModel.find({organisation:req.body.userId})
+        .populate('donar').populate('hospital').sort({createdAt:-1})
+
+        return res.status(201).send({
+            success:true,
+            message:'Get all records Successfully',
+            inventry
+           
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            success:false,
+            message:'Error while getting Inventry',
+            error
+        })
+
+    }
+}
