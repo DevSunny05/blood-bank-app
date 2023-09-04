@@ -3,3 +3,16 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+/* form banner */
+.form-banner img{
+height: 100%;
+width: 100%;
+}
+
+.form-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
