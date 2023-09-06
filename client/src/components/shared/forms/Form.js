@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import InputType from "./InputType";
+import { Link } from "react-router-dom";
+import { handleLogin, handleRegister } from "../../../services/authService";
 
 const Form = ({ formType, submitbtn, title }) => {
   const [email, setEmail] = useState("");
@@ -14,7 +16,10 @@ const Form = ({ formType, submitbtn, title }) => {
 
   return (
     <>
-      <form>
+      <form onSubmit={(e)=>{
+        if(formType === 'login') return handleLogin(e,email,password,role)
+        else if (formType === 'register') return handleRegister(e,name ,role,email,password,organisationName,hospitalName,website,address,phone)
+      }}>
         <h1
           className="text-center  "
           style={{ marginTop: 100, marginBottom: 20 }}
@@ -80,6 +85,7 @@ const Form = ({ formType, submitbtn, title }) => {
           </div>
         </div>
         {(() => {
+            // eslint-disable-next-line
           switch (true) {
             case formType === "login": {
               return (
@@ -190,7 +196,14 @@ const Form = ({ formType, submitbtn, title }) => {
           }
         })()}
 
-        <div className="d-flex">
+        <div className="d-flex flex-row justify-content-between m-4">
+            {
+                formType === 'login'?(
+                    <p>Not Registerd yet? <Link to={'/register'}>Register</Link> </p>
+                ):(
+                    <p>Already user please? <Link to={'/login'}>Login</Link> </p>
+                )
+            }
           <button className="btn btn-primary" type="submit">
             {submitbtn}
           </button>
