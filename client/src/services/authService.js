@@ -1,6 +1,6 @@
 import { toast } from "react-toastify"
 import store from "../redux/store"
-import { userLogin } from "../redux/features/auth/authAction"
+import { userLogin, userRegister } from "../redux/features/auth/authAction"
 
 
 export const handleLogin=(e,email,password,role)=>{
@@ -18,7 +18,7 @@ export const handleLogin=(e,email,password,role)=>{
 export const handleRegister=(e,name ,role,email,password,organisationName,hospitalName,website,address,phone)=>{
     e.preventDefault()
     try {
-        
+        store.dispatch(userRegister({name ,role,email,password,organisationName,hospitalName,website,address,phone}))
     } catch (error) {
         
     }
