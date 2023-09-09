@@ -10,7 +10,7 @@ const InputType = ({value,onChange,name,type,label,labelFor}) => {
              className="form-control" 
              name={name}
              value={value}
-             onChange={onchange}
+             onChange={onChange}
              />
                         
         </div>
