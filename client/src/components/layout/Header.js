@@ -22,7 +22,9 @@ const Header = () => {
                 </div>
                 <ul className="navbar-nav flex-row">
                     <li className="nav-item mx-3">
-                        <p className="nav-link"><BiUserCircle/>  Welcome: {user.name.toUpperCase()}</p>
+                        <p className="nav-link"><BiUserCircle/>  Welcome: {user?.name.toUpperCase() || user?.hospitalName.toUpperCase() || user?.organisationName.toUpperCase()} &nbsp;
+                        <span class="badge bg-secondary">{user?.role}</span>
+                        </p>
                     </li>
                     <li className="nav-item mx-3">
                        <button className="btn btn-danger" onClick={handleLogout}>Logout</button>

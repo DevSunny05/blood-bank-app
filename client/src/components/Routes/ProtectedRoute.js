@@ -17,7 +17,7 @@ const ProtectedRoute = ({children}) => {
                 },
             }
             )
-            console.log(data)
+            
             if(data?.success){
                 dispatch(setUser(data.user))
             }
