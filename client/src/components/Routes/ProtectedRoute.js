@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import API from '../../services/API'
-import { getCurrentUser } from '../../redux/features/auth/authAction'
 import { Navigate } from 'react-router-dom'
+import axios from 'axios'
+import { setUser } from '../../redux/features/auth/authSlice'
 
 const ProtectedRoute = ({children}) => {
     const dispatch=useDispatch()
@@ -10,13 +10,19 @@ const ProtectedRoute = ({children}) => {
     // get current user
     const getUser=async()=>{
         try {
-            const {data}=await API.get('/auth/current-user')
-
+            const {data}=await axios.get('/api/v1/auth/current-user',
+            {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+            }
+            )
+            console.log(data)
             if(data?.success){
-                dispatch(getCurrentUser())
+                dispatch(setUser(data.user))
             }
         } catch (error) {
-            localStorage.clear()
+            // localStorage.clear()
             console.log(error)
         }
     }

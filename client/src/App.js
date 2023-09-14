@@ -2,8 +2,8 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
+import LoginPage from './pages/auth/LoginPage';
+import RegisterPage from './pages/auth/RegisterPage';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProtectedRoute from './components/Routes/ProtectedRoute';
@@ -15,8 +15,8 @@ function App() {
    <ToastContainer/>
     <Routes>
       <Route path='/' element={<ProtectedRoute><HomePage/></ProtectedRoute>}/>
-      <Route path='/login' element={<PublicRoute><Login/></PublicRoute>}/>
-      <Route path='/register' element={<PublicRoute><Register/></PublicRoute>}/>
+      <Route path='/login' element={<PublicRoute><LoginPage/></PublicRoute>}/>
+      <Route path='/register' element={<PublicRoute><RegisterPage/></PublicRoute>}/>
     </Routes>
    </>
   );

@@ -1,10 +1,10 @@
 import React from 'react'
 
-const InputType = ({value,onChange,name,type,label,labelFor}) => {
+const InputType = ({value,onChange,name,type,labelText,htmlFor}) => {
   return (
     <>
         <div className="mb-3">
-            <label htmlFor={labelFor} className="form-label">{label}</label>
+            <label htmlFor={htmlFor} className="form-label">{labelText}</label>
             <input
              type={type}
              className="form-control" 
