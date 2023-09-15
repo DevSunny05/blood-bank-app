@@ -15,7 +15,7 @@ const HomePage = () => {
           <h4 className="ms-4 py-4" style={{ cursor: "pointer",display:'flex',alignItems:'center', }}>
             <i style={{marginRight:'10px'}} className="fa-solid fa-plus text-success "></i>
             <p
-                style={{paddingTop:'10px'}}
+                style={{paddingTop:'10px',cursor:'pointer'}}
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
             >

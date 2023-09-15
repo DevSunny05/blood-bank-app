@@ -14,13 +14,13 @@ export const createInventryController=async(req,res)=>{
             })
         }
 
-        if(inventryType === 'in' && user.role !== 'donar'){
-            return res.status(401).json({
-                success:false,
-                message:'Not a donar account',
+        // if(inventryType === 'in' && user.role !== 'donar'){
+        //     return res.status(401).json({
+        //         success:false,
+        //         message:'Not a donar account',
                
-            })
-        }
+        //     })
+        // }
 
         if(inventryType === 'out' && user.role !== 'hospital'){
             return res.status(401).json({
