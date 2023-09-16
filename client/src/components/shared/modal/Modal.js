@@ -1,11 +1,47 @@
 import React, { useState } from "react";
 import InputType from "../forms/InputType";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Modal = () => {
   const [inventryType, setInventryType] = useState("in");
   const [bloodGroup, setBloodGroup] = useState("");
   const [quantity, setQuantity] = useState(0);
   const [donarEmail, setDonarEmail] = useState("");
+  const { user } = useSelector((state) => state.auth);
+
+  //   handle modal data
+  const handleModalSubmit = async () => {
+    try {
+      if (!bloodGroup || !quantity) {
+        return toast.error("Please provide all fields");
+      }
+      const { data } = await axios.post(
+        "/api/v1/inventry/create-inventry",
+        {
+          donarEmail,
+          email: user?.email,
+          organisation: user?._id,
+          inventryType,
+          bloodGroup,
+          quantity,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      if (data?.success) {
+        toast.success("New Record Created");
+        // window.location.reload()
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       {/* Modal */}
@@ -85,9 +121,9 @@ const Modal = () => {
               />
 
               <InputType
-                labelText={"Quantity"}
+                labelText={"Quantity (ML)"}
                 htmlFor={"quantity"}
-                type={'Number'}
+                type={"Number"}
                 value={quantity}
                 onChange={(e) => {
                   setQuantity(e.target.value);
@@ -102,7 +138,11 @@ const Modal = () => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleModalSubmit}
+              >
                 Submit
               </button>
             </div>
